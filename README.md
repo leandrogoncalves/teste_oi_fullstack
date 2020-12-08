@@ -31,9 +31,10 @@ Projeto de teste de conhecimentos para a empresa OI
 
 ## Dependências
 
-- NodeJs : 10.21.0
-- Npm : 5.8.0
+- NodeJs : v14.0.0
+- Npm : v6.14.0
 - React: v17.0.1
+- Docker: v2.5.0.1
 
 
 ## Configuração inicial
