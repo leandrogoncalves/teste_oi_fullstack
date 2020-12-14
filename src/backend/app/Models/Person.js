@@ -6,16 +6,16 @@ const Database = use('Database');
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
-class LegalPerson extends Model {
-  static collectionName = 'legal_person'
+class Person extends Model {
+  static collectionName = 'person'
 
   getQueryBuilder(){
-    return Database.collection(LegalPerson.collectionName);
+    return Database.collection(Person.collectionName);
   }
 
   async findById(id){
     return await Database
-      .collection(LegalPerson.collectionName)
+      .collection(Person.collectionName)
       .where({_id:  ObjectId(id)})
       .find()
   }
@@ -23,11 +23,13 @@ class LegalPerson extends Model {
   async save(data){
 
     const cleanedData = {
-      social_reason: data.social_reason,
-      cnpj: data.cnpj,
+      name: data.name,
+      document: data.document,
       state_id: data.state_id,
       city_id: data.city_id,
       phone: data.phone,
+      type: data.type,
+      birth_date: !data.hasOwnProperty('birth_date')?'':data.birth_date,
     }
 
     if(data.hasOwnProperty('id') && data.id){
@@ -38,7 +40,7 @@ class LegalPerson extends Model {
       }
 
       return await Database
-        .collection(LegalPerson.collectionName)
+        .collection(Person.collectionName)
         .where({_id:  ObjectId(data.id)})
         .update(cleanedData);
     }
@@ -49,9 +51,9 @@ class LegalPerson extends Model {
 
   async insert(data){
     return await Database
-      .collection(LegalPerson.collectionName)
+      .collection(Person.collectionName)
       .insert(data);
   }
 }
 
-module.exports = new LegalPerson
+module.exports = new Person

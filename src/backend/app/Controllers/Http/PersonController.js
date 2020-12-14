@@ -1,13 +1,14 @@
 'use strict'
 
 const Logger = use('Logger');
-const PhysicalPersonService = use('App/Services/PhysicalPersonService');
+const PersonService = use('App/Services/PersonService');
 
-class PhysicalPersonController {
+class PersonController {
+
   async index ({  request, response }) {
     try{
       const query = request.get()
-      const person = await PhysicalPersonService.getByFilters(query);
+      const person = await PersonService.getByFilters(query);
 
       response.send({
         data: person,
@@ -22,9 +23,9 @@ class PhysicalPersonController {
     }
   }
 
- async getById ({ params,  request, response }) {
+  async getById ({ params,  request, response }) {
     try{
-      const person = await PhysicalPersonService.getById(params.id);
+      const person = await PersonService.getById(params.id);
 
       response.send({
         data: person,
@@ -42,7 +43,7 @@ class PhysicalPersonController {
   async store ({ request, response }) {
     try{
       const body = request.post()
-      const person = await PhysicalPersonService.store(body);
+      const person = await PersonService.store(body);
 
       if(!person.success){
         response.send(person);
@@ -64,4 +65,4 @@ class PhysicalPersonController {
 
 }
 
-module.exports = PhysicalPersonController
+module.exports = PersonController

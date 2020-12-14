@@ -3,18 +3,18 @@
 const { validate } = use('Validator');
 const Logger = use('Logger');
 
-const LegalPerson = use('App/Models/LegalPerson');
+const Person = use('App/Models/Person');
 
-class LegalPersonService {
+class PersonService {
 
   async getByFilters(filters = null){
-    const queryBuilder = LegalPerson.getQueryBuilder();
+    const queryBuilder = Person.getQueryBuilder();
 
-    if(filters.hasOwnProperty('social_reason') && filters.social_reason){
-      queryBuilder.where({ social_reason : {$regex: new RegExp(filters.social_reason) }})
+    if(filters.hasOwnProperty('name') && filters.name){
+      queryBuilder.where({ name : {$regex: new RegExp(filters.name) }})
     }
-    if(filters.hasOwnProperty('cnpj') && filters.cnpj){
-      queryBuilder.where({ cnpj : {$eq: filters.cnpj }})
+    if(filters.hasOwnProperty('document') && filters.document){
+      queryBuilder.where({ document : {$eq: filters.document }})
     }
     if(filters.hasOwnProperty('city_id') && filters.city_id){
       queryBuilder.where({ city_id : {$eq: parseInt(filters.city_id) }})
@@ -22,21 +22,25 @@ class LegalPersonService {
     if(filters.hasOwnProperty('state_id') && filters.state_id){
       queryBuilder.where({ state_id : {$eq: parseInt(filters.state_id) }})
     }
+    if(filters.hasOwnProperty('type') && filters.type){
+      queryBuilder.where({ type : {$eq: filters.type }})
+    }
 
     return await queryBuilder.find();
   }
 
   async getById(id) {
-    return await LegalPerson.findById(id);
+    return await Person.findById(id);
   }
 
   async store(data){
 
     const rules = {
-      social_reason: 'required',
-      cnpj: 'required',
+      name: 'required',
+      document: 'required',
       state_id: 'required',
       city_id: 'required',
+      type: 'required',
       phone: 'required',
     }
 
@@ -55,7 +59,7 @@ class LegalPersonService {
       }
     }
 
-    const physicalPerson = await LegalPerson.save(data);
+    const physicalPerson = await Person.save(data);
 
     if(!physicalPerson){
       return {
@@ -72,4 +76,4 @@ class LegalPersonService {
 
 }
 
-module.exports = new LegalPersonService;
+module.exports = new PersonService;
