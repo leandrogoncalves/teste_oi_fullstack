@@ -41,8 +41,11 @@ Projeto de teste de conhecimentos para a empresa OI
 
 1. Clone o repositório: `git clone git@github.com:leandrogoncalves/teste_oi_fullstack.git`
 1. Acesse a pasta do projeto: `cd teste_oi_fullstack`
-1. Atribua permissão de execução no script de inicialização: `chmod +x ./src/scripts/startup.sh`
-1. Execute o script de inicialização: `./src/scripts/startup.sh`
+1. Inicialize o mongodb através dos scripts: `./scripts/mongodb.sh && create_user_mongodb.sh`
+1. Execute o script de inicialização do backend: `./scripts/startup.sh`
+1. Acesse o link para carregar os estados para o mongodb: `localhost:3333/api/v1/state/bulk-import`
+1. Acesse o link para carregar os municipios para o mongodb: `localhost:3333/api/v1/city/bulk-import`
+
 
 ## Execução
 
