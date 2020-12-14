@@ -5,12 +5,12 @@ const Database = use('Database');
 const { validate } = use('Validator');
 const Logger = use('Logger')
 
+const State = use('App/Models/State')
+
 class StateService {
 
   async getAll(){
-    return await Database
-      .collection('states')
-      .find();
+    return await State.getQueryBuilder().find();
   }
 
   async store(data){
@@ -36,9 +36,7 @@ class StateService {
       }
     }
 
-    const stateId = await Database
-      .collection('states')
-      .insert(data);
+    const stateId = await State.save(data);
 
     if(!stateId){
       return {

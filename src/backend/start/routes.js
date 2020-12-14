@@ -38,3 +38,15 @@ Route.group(() => {
   Route.get('/bulk-import', 'CityController.bulkImport').as('city.bulkImport')
   Route.get('/state/:state', 'CityController.getByState').as('city.getByState')
 }).prefix('api/v1/city')
+
+Route.group(() => {
+  Route.get('/:id', 'PhysicalPersonController.getById').as('physicalPerson.getById')
+  Route.get('/', 'PhysicalPersonController.index').as('physicalPerson.index')
+  Route.post('/', 'PhysicalPersonController.store').as('physicalPerson.store')
+}).prefix('api/v1/physical-person')
+
+Route.group(() => {
+  Route.get('/:id', 'LegalPersonController.getById').as('legalPerson.getById')
+  Route.get('/', 'LegalPersonController.index').as('legalPerson.index')
+  Route.post('/', 'LegalPersonController.store').as('legalPerson.store')
+}).prefix('api/v1/legal-person')

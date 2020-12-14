@@ -5,18 +5,17 @@ const Database = use('Database');
 const { validate } = use('Validator');
 const Logger = use('Logger');
 const StateService = use('App/Services/StateService');
+const City = use('App/Models/City');
 
 class CityService {
 
   async getAll(){
-    return await Database
-      .collection('cities')
-      .find();
+    return await City.getQueryBuilder().find()
   }
 
   async getByState(filters){
-    return await Database
-      .collection('cities')
+    const queryBuilder = City.getQueryBuilder();
+    return await queryBuilder
       .where({ state_initials : { $eq : filters.state.toUpperCase() } })
       .find();
   }
@@ -45,9 +44,7 @@ class CityService {
       }
     }
 
-    const cityId = await Database
-      .collection('cities')
-      .insert(data);
+    const cityId = await City.save(data);
 
     if(!cityId){
       return {

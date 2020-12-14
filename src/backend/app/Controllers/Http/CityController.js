@@ -1,6 +1,6 @@
 'use strict'
 
-const Logger = use('Logger')
+const Logger = use('Logger');
 const CityService = use('App/Services/CityService');
 
 class CityController {
@@ -16,6 +16,7 @@ class CityController {
     }catch (e){
       Logger.error(e);
       response.send({
+        success: false,
         message: 'Error ocurred during getting data'
       });
     }
@@ -32,6 +33,7 @@ class CityController {
     }catch (e){
       Logger.error(e);
       response.send({
+        success: false,
         message: 'Error ocurred during getting data'
       });
     }
@@ -49,7 +51,8 @@ class CityController {
     }catch (e) {
       Logger.error(e);
       response.send({
-        data: e
+        success: false,
+        message: 'Error ocurred during storing data'
       });
     }
   }

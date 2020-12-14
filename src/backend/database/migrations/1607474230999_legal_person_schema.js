@@ -5,7 +5,7 @@ const Schema = use('Schema')
 
 class LegalPersonSchema extends Schema {
   up () {
-    this.create('legal_people', (table) => {
+    this.create('legal_person', (table) => {
       table.increments()
       table.integer('id')
       table.string('social_reason')
